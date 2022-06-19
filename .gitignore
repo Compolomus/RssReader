@@ -1,4 +1,5 @@
-/.CACHE/
+/.env
+/example/.cache
 /.idea/
 /vendor/
 /index.php
