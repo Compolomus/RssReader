@@ -1,18 +1,20 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 use Compolomus\RssReader\RssReader;
 use Symfony\Component\Dotenv\Dotenv;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
+// Load env variables
 $dotenv = new Dotenv();
-$dotenv->load('.env');
-$dir = $_ENV['CACHEDIR'];
+$dotenv->load(__DIR__ . '/../.env');
 
-$rss = new RssReader($dir);
+// Read channels
+$rss = new RssReader([
+    'https://3dnews.ru/breaking/rss/',
+    'https://3dnews.ru/motherboard/rss/',
+]);
 
-$rss->addChannel('https://3dnews.ru/breaking/rss/');
-$rss->addChannel('https://3dnews.ru/motherboard/rss/');
-
+// Get all posts
 $result = $rss->getAll();
 echo '<pre>' . print_r($result, true) . '</pre>';
