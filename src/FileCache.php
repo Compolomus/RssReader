@@ -2,12 +2,11 @@
 
 namespace Compolomus\RssReader;
 
-use JetBrains\PhpStorm\NoReturn;
 use SplFileObject;
 
 class FileCache implements CacheInterface
 {
-    #[NoReturn] public function __construct(
+    public function __construct(
         public ?string         $cacheDir = null,
         private string         $cacheIdsFile = 'cacheIds.txt',
         private ?SplFileObject $cacheIds = null,
