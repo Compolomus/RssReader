@@ -13,7 +13,7 @@ class RssReader
         public array           $channels = [],
         public ?CacheInterface $cache = null,
     ) {
-        if (null === $cache) {
+        if (null === $this->cache) {
             $this->cache = new FileCache();
         }
     }
