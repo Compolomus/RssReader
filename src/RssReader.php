@@ -11,14 +11,14 @@ use DOMXPath;
 
 class RssReader
 {
-    private Cache $cache;
+    private CacheInterface $cache;
 
-    public function __construct(Cache $cache)
+    public function __construct(CacheInterface $cache)
     {
         $this->cache = $cache;
     }
 
-    public function getCache()
+    public function getCache(): CacheInterface
     {
         return $this->cache;
     }
@@ -67,5 +67,4 @@ class RssReader
             ];
         }
     }
-
 }
