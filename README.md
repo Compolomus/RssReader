@@ -1,6 +1,6 @@
 # Compolomus Pagination
 
-[![License](https://poser.pugx.org/compolomus/Pagination/license)](https://packagist.org/packages/compolomus/Pagination)
+[![License](https://poser.pugx.org/compolomus/RssReader/license)](https://packagist.org/packages/compolomus/RssReader)
 
 [![Build Status](https://scrutinizer-ci.com/g/Compolomus/RssReader/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Compolomus/RssReader/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Compolomus/RssReader/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Compolomus/RssReader/?branch=master)
@@ -16,7 +16,7 @@ composer require compolomus/RssReader
 
 ```php
 
-use Compolomus\Pagination\RssReader;
+use Compolomus\RssReader;
 
 require __DIR__ . '/vendor/autoload.php';
 
