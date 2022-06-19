@@ -10,8 +10,6 @@ use DOMXPath;
 use SplFileObject;
 use Symfony\Component\Dotenv\Dotenv;
 
-use function PHPUnit\Framework\fileExists;
-
 class RssReader
 {
     private SplFileObject $cache;
@@ -35,7 +33,6 @@ class RssReader
         if (!is_dir($dir)) {
             mkdir($dir);
         }
-
 
         $this->cache = new SplFileObject($this->cacheFile, 'a+b');
         $this->cacheIds = new SplFileObject($this->cacheIdsFile, 'a+b');
@@ -90,7 +87,7 @@ class RssReader
 
     protected function getCacheChannels(): array
     {
-        return fileExists($this->cacheFile) ? file(
+        return file_exists($this->cacheFile) ? file(
             $this->cacheFile,
             FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
         ) : [];
@@ -98,10 +95,9 @@ class RssReader
 
     protected function getCacheIds(): array
     {
-        return fileExists($this->cacheIdsFile) ? file(
+        return file_exists($this->cacheIdsFile) ? file(
             $this->cacheIdsFile,
             FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
         ) : [];
     }
-
 }
