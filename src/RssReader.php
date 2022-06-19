@@ -6,40 +6,21 @@ namespace Compolomus\RssReader;
 
 use DateTime;
 use DOMDocument;
+use DOMElement;
 use DOMXPath;
-use SplFileObject;
-use Symfony\Component\Dotenv\Dotenv;
 
 class RssReader
 {
-    private SplFileObject $cache;
+    private Cache $cache;
 
-    private SplFileObject $cacheIds;
-
-    private string $cacheFile;
-
-    private string $cacheIdsFile;
-
-    public function __construct(string $dir)
+    public function __construct(Cache $cache)
     {
-        $this->cacheFile = $dir . '/cacheChannels.txt';
-        $this->cacheIdsFile = $dir . '/cacheIds.txt';
-
-        if (!is_dir($dir)) {
-            mkdir($dir);
-        }
-
-        $this->cache = new SplFileObject($this->cacheFile, 'a+b');
-        $this->cacheIds = new SplFileObject($this->cacheIdsFile, 'a+b');
+        $this->cache = $cache;
     }
 
-    public function addChannel(string $url): bool
+    public function getCache()
     {
-        if (!in_array($url, file($this->cacheFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES), true)) {
-            return (bool) $this->cache->fwrite($url . PHP_EOL);
-        }
-
-        return false;
+        return $this->cache;
     }
 
     public function getAll(): array
@@ -48,51 +29,43 @@ class RssReader
         $result = [];
         $ids = [];
 
-        foreach ($this->getCacheChannels() as $chanel) {
+        foreach ($this->cache->getCacheChannels() as $chanel) {
             $dom->load($chanel);
             $items = $dom->getElementsByTagName('item');
             $xpath = new DOMXpath($dom);
             foreach ($items as $item) {
-                $link = $item->getElementsByTagName('link')->item(0)->nodeValue;
-                preg_match('#\/(\d{3,})\/{0,1}#', $link, $matches);
-                $timestamp = (new DateTime($item->getElementsByTagName('pubDate')->item(0)->nodeValue))->getTimestamp();
-                $id = $matches[1];
-                $cacheId = $id . '-' . $timestamp;
-                if (!in_array($cacheId, $this->getCacheIds(), true)) {
-                    $result[] = [
-                        'id' => $id,
-                        'title' => $item->getElementsByTagName('title')->item(0)->nodeValue,
-                        'desc' => trim(strip_tags($item->getElementsByTagName('description')->item(0)->nodeValue)),
-                        'link' => $link,
-                        'timestamp' => $timestamp,
-                        'img' => $xpath->query('//enclosure/@url')->item(0)->nodeValue,
-                        'cacheId' => $cacheId
-                    ];
-                    $ids[] = $cacheId;
-                }
+                $data = $this->getItemData($item, $xpath);
+                $result[] = $data;
+                $ids[] = $data['cacheId'];
             }
         }
 
         if (count($ids)) {
-            $this->cacheIds->fwrite(implode(PHP_EOL, $ids) . PHP_EOL);
+            $this->cache->updateCacheIds($ids);
         }
 
         return $result;
     }
 
-    protected function getCacheChannels(): array
+    public function getItemData(DOMElement $item, DOMXpath $xpath)
     {
-        return file_exists($this->cacheFile) ? file(
-            $this->cacheFile,
-            FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
-        ) : [];
+        $link = $item->getElementsByTagName('link')->item(0)->nodeValue;
+        preg_match('#\/(\d{3,})\/{0,1}#', $link, $matches);
+        $timestamp = (new DateTime($item->getElementsByTagName('pubDate')->item(0)->nodeValue))->getTimestamp();
+        $id = $matches[1];
+        $cacheId = $this->cache->generateId($link);
+
+        if (!in_array($cacheId, $this->cache->getCacheIds(), true)) {
+            return [
+                'id' => $id,
+                'title' => $item->getElementsByTagName('title')->item(0)->nodeValue,
+                'desc' => trim(strip_tags($item->getElementsByTagName('description')->item(0)->nodeValue)),
+                'link' => $link,
+                'timestamp' => $timestamp,
+                'img' => $xpath->query('//enclosure/@url')->item(0)->nodeValue,
+                'cacheId' => $cacheId
+            ];
+        }
     }
 
-    protected function getCacheIds(): array
-    {
-        return file_exists($this->cacheIdsFile) ? file(
-            $this->cacheIdsFile,
-            FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
-        ) : [];
-    }
 }
