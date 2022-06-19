@@ -1,99 +1,78 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Compolomus\RssReader;
 
 use DateTime;
 use DOMDocument;
 use DOMXPath;
-use SplFileObject;
-use Symfony\Component\Dotenv\Dotenv;
+use function count;
 
 class RssReader
 {
-    private SplFileObject $cache;
-
-    private SplFileObject $cacheIds;
-
-    private string $cacheFile;
-
-    private string $cacheIdsFile;
-
-    public function __construct(string $dir)
-    {
-        $this->cacheFile = $dir . '/cacheChannels.txt';
-        $this->cacheIdsFile = $dir . '/cacheIds.txt';
-
-
-        if (!is_dir($dir)) {
-            mkdir($dir);
+    public function __construct(
+        public array           $channels = [],
+        public ?CacheInterface $cache = null,
+    ) {
+        if (null === $cache) {
+            $this->cache = new FileCache();
         }
-
-        $this->cache = new SplFileObject($this->cacheFile, 'a+b');
-        $this->cacheIds = new SplFileObject($this->cacheIdsFile, 'a+b');
     }
 
-    public function addChannel(string $url): bool
+    /**
+     * @throws \Exception
+     */
+    protected function getPostsFromChannel(string $chanel): ?array
     {
-        if (!in_array($url, file($this->cacheFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES), true)) {
-            return (bool) $this->cache->fwrite($url . PHP_EOL);
-        }
-
-        return false;
-    }
-
-    public function getAll(): array
-    {
+        // Load document
         $dom = new DOMDocument();
+        $dom->load($chanel);
+
+        // Extract all items
+        $items = $dom->getElementsByTagName('item');
+
+        // Build XPath object
+        $xpath = new DOMXpath($dom);
+
+        // Parse all items in loop
         $result = [];
-        $ids = [];
+        foreach ($items as $item) {
+            $link      = $item->getElementsByTagName('link')->item(0)->nodeValue;
+            $itemId    = crc32($link);
+            $timestamp = (new DateTime($item->getElementsByTagName('pubDate')->item(0)->nodeValue))->getTimestamp();
 
-        foreach ($this->getCacheChannels() as $chanel) {
-            $dom->load($chanel);
-            $items = $dom->getElementsByTagName('item');
-            $xpath = new DOMXpath($dom);
-            foreach ($items as $item) {
-                $link = $item->getElementsByTagName('link')->item(0)->nodeValue;
-                preg_match('#\/(\d{3,})\/{0,1}#', $link, $matches);
-                $timestamp = (new DateTime($item->getElementsByTagName('pubDate')->item(0)->nodeValue))->getTimestamp();
-                $id = $matches[1];
-                $cacheId = $id . '-' . $timestamp;
-                if (!in_array($cacheId, $this->getCacheIds(), true)) {
-                    $result[] = [
-                        'id' => $id,
-                        'title' => $item->getElementsByTagName('title')->item(0)->nodeValue,
-                        'desc' => trim(strip_tags($item->getElementsByTagName('description')->item(0)->nodeValue)),
-                        'link' => $link,
-                        'timestamp' => $timestamp,
-                        'img' => $xpath->query('//enclosure/@url')->item(0)->nodeValue,
-                        'cacheId' => $cacheId
-                    ];
-                    $ids[] = $cacheId;
-                }
+            // Extract posts which is not in a cache
+            if (!in_array($itemId, $this->cache->getIds(), false)) {
+                $result[] = [
+                    'id'        => $itemId,
+                    'title'     => $item->getElementsByTagName('title')->item(0)->nodeValue,
+                    'desc'      => trim(strip_tags($item->getElementsByTagName('description')->item(0)->nodeValue)),
+                    'link'      => $link,
+                    'timestamp' => $timestamp,
+                    'img'       => $xpath->query('//enclosure/@url')->item(0)->nodeValue,
+                ];
             }
-        }
-
-        if (count($ids)) {
-            $this->cacheIds->fwrite(implode(PHP_EOL, $ids) . PHP_EOL);
         }
 
         return $result;
     }
 
-    protected function getCacheChannels(): array
+    /**
+     * @throws \Exception
+     */
+    public function getAll(): array
     {
-        return file_exists($this->cacheFile) ? file(
-            $this->cacheFile,
-            FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
-        ) : [];
-    }
+        $result = [];
+        foreach ($this->channels as $chanel) {
+            $result[] = $this->getPostsFromChannel($chanel);
+        }
 
-    protected function getCacheIds(): array
-    {
-        return file_exists($this->cacheIdsFile) ? file(
-            $this->cacheIdsFile,
-            FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
-        ) : [];
+        $result = array_merge(...$result);
+        $ids    = array_column($result, 'id');
+
+        if (count($ids)) {
+            $this->cache->saveIds($ids);
+        }
+
+        return $result;
     }
 }
