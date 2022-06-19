@@ -20,12 +20,8 @@ class RssReader
 
     private string $cacheIdsFile;
 
-    public function __construct(string $envFile = __DIR__ . '/.env')
+    public function __construct(string $dir)
     {
-        $dotenv = new Dotenv();
-        $dotenv->load($envFile);
-        $dir = $_ENV['CACHEDIR'];
-
         $this->cacheFile = $dir . '/cacheChannels.txt';
         $this->cacheIdsFile = $dir . '/cacheIds.txt';
 

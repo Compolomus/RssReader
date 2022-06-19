@@ -1,10 +1,15 @@
 <?php
 
 use Compolomus\RssReader\RssReader;
+use Symfony\Component\Dotenv\Dotenv;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$rss = new RssReader(__DIR__ . '/../.env');
+$dotenv = new Dotenv();
+$dotenv->load('.env');
+$dir = $_ENV['CACHEDIR'];
+
+$rss = new RssReader($dir);
 
 $rss->addChannel('https://3dnews.ru/breaking/rss/');
 $rss->addChannel('https://3dnews.ru/motherboard/rss/');
