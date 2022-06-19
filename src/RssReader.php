@@ -5,7 +5,13 @@ namespace Compolomus\RssReader;
 use DateTime;
 use DOMDocument;
 use DOMXPath;
+use function array_column;
+use function array_merge;
 use function count;
+use function crc32;
+use function in_array;
+use function strip_tags;
+use function trim;
 
 class RssReader
 {
