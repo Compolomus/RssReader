@@ -25,7 +25,6 @@ class RssReader
         $this->cacheFile = $dir . '/cacheChannels.txt';
         $this->cacheIdsFile = $dir . '/cacheIds.txt';
 
-
         if (!is_dir($dir)) {
             mkdir($dir);
         }

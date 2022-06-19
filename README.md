@@ -1,4 +1,4 @@
-# Compolomus Pagination
+# Compolomus RssReader
 
 [![License](https://poser.pugx.org/compolomus/RssReader/license)](https://packagist.org/packages/compolomus/RssReader)
 
