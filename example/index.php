@@ -17,4 +17,4 @@ $rss = new RssReader([
 
 // Get all posts
 $result = $rss->getAll();
-echo '<pre>' . print_r($result, true) . '</pre>';
+print_r($result);

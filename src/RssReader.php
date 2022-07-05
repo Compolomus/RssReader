@@ -18,7 +18,12 @@ class RssReader
     public function __construct(
         public array           $channels = [],
         public ?CacheInterface $cache = null,
+        public int             $limit = 0,
     ) {
+        if (!empty($_ENV['RSSREADER_LIMIT'])) {
+            $this->limit = (int) $_ENV['RSSREADER_LIMIT'];
+        }
+
         if (null === $this->cache) {
             $this->cache = new FileCache();
         }
@@ -63,6 +68,21 @@ class RssReader
     }
 
     /**
+     * Return array with only unique elements
+     *
+     * @param array $array
+     *
+     * @return array
+     */
+    public function getUnique(array $array): array
+    {
+        $serialized = array_map('serialize', $array);
+        $unique     = array_unique($serialized);
+
+        return array_intersect_key($array, $unique);
+    }
+
+    /**
      * @throws \Exception
      */
     public function getAll(): array
@@ -72,11 +92,30 @@ class RssReader
             $result[] = $this->getPostsFromChannel($chanel);
         }
 
+        // Merge results from all sources
         $result = array_merge(...$result);
-        $ids    = array_column($result, 'id');
 
+        // Only unique records
+        $result = $this->getUnique($result);
+
+        // Sort array by timestamp column
+        usort($result, static function ($a, $b) {
+            if ($a['timestamp'] === $b['timestamp']) {
+                return 0;
+            }
+            // ASC order
+            return ($a['timestamp'] > $b['timestamp']) ? 1 : -1;
+        });
+
+        // Extract IDs and save them all
+        $ids = array_column($result, 'id');
         if (count($ids)) {
             $this->cache->saveIds($ids);
+        }
+
+        // Slice last few posts if limit is set
+        if (!empty($this->limit)) {
+            $result = array_slice($result, -$this->limit, $this->limit);
         }
 
         return $result;

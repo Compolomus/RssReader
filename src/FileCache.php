@@ -7,12 +7,12 @@ use SplFileObject;
 class FileCache implements CacheInterface
 {
     public function __construct(
-        public ?string         $cacheDir = null,
-        private string         $cacheIdsFile = 'cacheIds.txt',
+        public string          $cacheDir = '/tmp/.rssreader_cache',
+        public string          $cacheIdsFile = 'cacheIds.txt',
         private ?SplFileObject $cacheIds = null,
     ) {
         // Read path cache dir from env
-        if (null === $this->cacheDir) {
+        if (!empty($_ENV['RSSREADER_CACHE_DIR'])) {
             $this->cacheDir = $_ENV['RSSREADER_CACHE_DIR'];
         }
 
