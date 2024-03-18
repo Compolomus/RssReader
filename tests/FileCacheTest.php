@@ -29,11 +29,11 @@ class FileCacheTest extends TestCase
     public function testSaveIdsAndGetIds(): void
     {
         $items = [
-            ['id' => 'id1'],
-            ['id' => 'id2'],
-            ['id' => 'id3'],
+            ['_id' => 'id1'],
+            ['_id' => 'id2'],
+            ['_id' => 'id3'],
         ];
-        $ids = array_column($items, 'id');
+        $ids = array_column($items, '_id');
 
         // Test saving IDs
         $numBytesWritten = $this->fileCache->save($items);

@@ -37,7 +37,7 @@ class FileCache implements CacheInterface
      */
     public function save(array $items = []): int
     {
-        $ids = array_column($items, 'id');
+        $ids = array_column($items, '_id');
         return $this->cacheIds->fwrite(implode(PHP_EOL, $ids) . PHP_EOL);
     }
 
