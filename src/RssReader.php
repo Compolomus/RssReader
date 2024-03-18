@@ -2,65 +2,68 @@
 
 namespace Compolomus\RssReader;
 
-use DateTime;
-use DOMDocument;
-use DOMXPath;
 use function array_column;
 use function array_merge;
 use function count;
 use function crc32;
 use function in_array;
-use function strip_tags;
 use function trim;
+
+use Compolomus\RssReader\Cache\CacheInterface;
+use Compolomus\RssReader\Cache\FileCache;
 
 class RssReader
 {
     public function __construct(
         public array           $channels = [],
-        public ?CacheInterface $cache = null,
+        public ?CacheInterface $cache = new FileCache(),
         public int             $limit = 0,
+        public bool            $enable_categories = false,
     ) {
         if (!empty($_ENV['RSSREADER_LIMIT'])) {
             $this->limit = (int) $_ENV['RSSREADER_LIMIT'];
         }
+    }
 
-        if (null === $this->cache) {
-            $this->cache = new FileCache();
-        }
+    /**
+     * Obtain all posts details from RSS feed
+     *
+     * @param string $path It can be a path to file or http(s):// address
+     *
+     * @return mixed
+     * @throws \JsonException
+     */
+    public function getChannel(string $path): array
+    {
+        // Read content of RSS feed
+        $fileContents = file_get_contents($path);
+        $fileContents = str_replace(["\n", "\r", "\t"], '', $fileContents);
+        $fileContents = trim(str_replace('"', "'", $fileContents));
+        $simpleXml    = simplexml_load_string($fileContents, "SimpleXMLElement", LIBXML_NOCDATA);
+
+        // Convert content to simpler format
+        $encode = json_encode($simpleXml, JSON_THROW_ON_ERROR);
+        $decode = json_decode($encode, true, 512, JSON_THROW_ON_ERROR);
+
+        // Return array
+        return $decode ?? [];
     }
 
     /**
      * @throws \Exception
      */
-    protected function getPostsFromChannel(string $chanel): ?array
+    public function getPostsFromChannel(string $path): ?array
     {
-        // Load document
-        $dom = new DOMDocument();
-        $dom->load($chanel);
-
-        // Extract all items
-        $items = $dom->getElementsByTagName('item');
-
-        // Build XPath object
-        $xpath = new DOMXpath($dom);
+        $channel = $this->getChannel($path);
+        $items   = $channel['channel']['item'];
 
         // Parse all items in loop
         $result = [];
         foreach ($items as $item) {
-            $link      = $item->getElementsByTagName('link')->item(0)->nodeValue;
-            $itemId    = crc32($link);
-            $timestamp = (new DateTime($item->getElementsByTagName('pubDate')->item(0)->nodeValue))->getTimestamp();
-
-            // Extract posts which is not in a cache
+            $itemId = crc32($item['link']);
             if (!in_array($itemId, $this->cache->getIds(), false)) {
-                $result[] = [
-                    'id'        => $itemId,
-                    'title'     => $item->getElementsByTagName('title')->item(0)->nodeValue,
-                    'desc'      => trim(strip_tags($item->getElementsByTagName('description')->item(0)->nodeValue)),
-                    'link'      => $link,
-                    'timestamp' => $timestamp,
-                    'img'       => $xpath->query('//enclosure/@url')->item(0)->nodeValue,
-                ];
+                $itemTimestamp = (new \DateTime($item['pubDate']))->getTimestamp();
+                $result[] = $item + ['_id' => $itemId, '_timestamp' => $itemTimestamp];
             }
         }
 
@@ -87,19 +90,19 @@ class RssReader
      */
     public function getAll(): array
     {
-        $result = [];
-        foreach ($this->channels as $chanel) {
-            $result[] = $this->getPostsFromChannel($chanel);
+        $results = [];
+        foreach ($this->channels as $channel) {
+            $results[] = $this->getPostsFromChannel($channel);
         }
 
         // Merge results from all sources
-        $result = array_merge(...$result);
+        $results = array_merge(...$results);
 
         // Only unique records
-        $result = $this->getUnique($result);
+        $results = $this->getUnique($results);
 
         // Sort array by timestamp column
-        usort($result, static function ($a, $b) {
+        usort($results, static function ($a, $b) {
             if ($a['timestamp'] === $b['timestamp']) {
                 return 0;
             }
@@ -108,16 +111,15 @@ class RssReader
         });
 
         // Extract IDs and save them all
-        $ids = array_column($result, 'id');
-        if (count($ids)) {
-            $this->cache->saveIds($ids);
+        if (count($results)) {
+            $this->cache->save($results);
         }
 
         // Slice last few posts if limit is set
         if (!empty($this->limit)) {
-            $result = array_slice($result, -$this->limit, $this->limit);
+            $results = array_slice($results, -$this->limit, $this->limit);
         }
 
-        return $result;
+        return $results;
     }
 }
