@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" version="2.0">
+	<channel>
+		<title>3DNews: Видеокарты</title>
+		<link>https://3dnews.ru/</link>
+		<description>3DNews: Видеокарты</description>
+		<language>ru</language>
+		<pubDate>Mon, 18 Mar 2024 23:06:14 +0300</pubDate>
+		<lastBuildDate>Mon, 18 Mar 2024 23:06:14 +0300</lastBuildDate>
+		<docs>https://3dnews.ru/video/rss</docs>
+		<generator>3DNews</generator>
+		<managingEditor>nivnikov@3dnews.ru (Денис Нивников)</managingEditor>
+		<webMaster>admin@3dnews.ru</webMaster>
+		<image>
+		<url>https://3dnews.ru/assets/images/logo.png</url>
+		</image>
+		<atom:link href="https://3dnews.ru/video/rss" rel="self" type="application/rss+xml" />
+		<item>
+			<title>Обзор видеокарты Palit GeForce RTX 4070 Ti SUPER JetStream OC: ничего лишнего</title>
+			<link>https://3dnews.ru/1101549</link>
+			<guid>https://3dnews.ru/1101549/#65ef9747742eec783c8b45cb</guid>
+			<enclosure url="https://3dnews.ru/assets/external/illustrations/2024/03/12/1101549/sm.cover.800.jpg" length="232970" type="image/jpeg" />
+			<description><![CDATA[
+								<img align="left" hspace="10" src="https://3dnews.ru/assets/external/icons/2024/03/12/1101549.jpg" border="0" height="85" width="120" />GeForce RTX 4070 Ti SUPER в исполнении Palit отличается спартанским внешним видом без RGB-подсветки и почти незаметным заводским разгоном. Но эта видеокарта позаимствовала мощную систему охлаждения у RTX 4080 SUPER, а главное, стоит дешевле большинства аналогов			]]></description>
+			<pubDate>Fri, 15 Mar 2024 00:00:00 +0300</pubDate>
+			<category>Видеокарты - NVIDIA</category>
+		</item>
+		<item>
+			<title>Обзор видеокарты NVIDIA GeForce RTX 4080 SUPER: когда цена — это апгрейд</title>
+			<link>https://3dnews.ru/1101274</link>
+			<guid>https://3dnews.ru/1101274/#65e77f9e742eec3db88b45b0</guid>
+			<enclosure url="https://3dnews.ru/assets/external/illustrations/2024/03/05/1101274/sm.cover.800.jpg" length="231730" type="image/jpeg" />
+			<description><![CDATA[
+								<img align="left" hspace="10" src="https://3dnews.ru/assets/external/icons/2024/03/05/1101274.jpg" border="0" height="85" width="120" />GeForce RTX 4080 SUPER стал ненамного быстрее оригинального RTX 4080, зато ощутимо дешевле (по крайней мере за рубежом), а вслед за ним упали в цене и видеокарты AMD. Самое время окинуть свежим взглядом лучшие предложения обеих компаний. Тестирование выполнено на примере ускорителя Palit JetStream OC			]]></description>
+			<pubDate>Mon, 11 Mar 2024 00:00:00 +0300</pubDate>
+			<category>Видеокарты - NVIDIA</category>
+		</item>
+		<item>
+			<title>Обзор видеокарты NVIDIA GeForce RTX 4070 Ti SUPER: RTX 4080 на минималках</title>
+			<link>https://3dnews.ru/1100789</link>
+			<guid>https://3dnews.ru/1100789/#65db9269b4182e383e0b3310</guid>
+			<enclosure url="https://3dnews.ru/assets/external/illustrations/2024/02/25/1100789/sm.cover.800.jpg" length="276171" type="image/jpeg" />
+			<description><![CDATA[
+								<img align="left" hspace="10" src="https://3dnews.ru/assets/external/icons/2024/02/25/1100789.jpg" border="0" height="85" width="120" />Выбранная маркетологами NVIDIA рекомендованная стоимость GeForce RTX 4070 Ti SUPER прямо говорит, что новинка призвана заменить уходящий на пенсию RTX 4070 Ti. А с технической точки зрения она является младшей разновидностью RTX 4080 и соперником Radeon RX 7900 XT. Посмотрим, как реализована эта задумка. Тестирование выполнено на примере видеокарты GIGABYTE AORUS MASTER			]]></description>
+			<pubDate>Wed, 28 Feb 2024 00:00:00 +0300</pubDate>
+			<category>Видеокарты - NVIDIA</category>
+		</item>
+		<item>
+			<title>Наныли: обзор видеокарты NVIDIA GeForce RTX 4070 SUPER</title>
+			<link>https://3dnews.ru/1099811</link>
+			<guid>https://3dnews.ru/1099811/#65bfbe89b4182e3067c04d67</guid>
+			<enclosure url="https://3dnews.ru/assets/external/illustrations/2024/02/04/1099811/sm.cover.800.jpg" length="276951" type="image/jpeg" />
+			<description><![CDATA[
+								<img align="left" hspace="10" src="https://3dnews.ru/assets/external/icons/2024/02/04/1099811.jpg" border="0" height="85" width="120" />GeForce RTX 4070 SUPER удостоился самого щедрого апгрейда среди трех моделей 40-й серии — все для того, чтобы переманить покупателей у более доступного Radeon RX 7800 XT. Рассмотрим новинку на примере ускорителя GIGABYTE AORUS MASTER			]]></description>
+			<pubDate>Tue, 06 Feb 2024 00:00:00 +0300</pubDate>
+			<category>Видеокарты - NVIDIA</category>
+		</item>
+    </channel>
+</rss>

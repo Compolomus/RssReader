@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" >
+  <channel>
+    <title><![CDATA[Все статьи подряд / Искусственный интеллект / Хабр]]></title>
+    <link>https://habr.com/ru/hubs/artificial_intelligence/articles/</link>
+    <description><![CDATA[Искусственный интеллект – aI, ANN и иные формы искусственного разума]]></description>
+    <language>ru</language>
+    <managingEditor>editor@habr.com</managingEditor>
+    <generator>habr.com</generator>
+    <pubDate>Mon, 18 Mar 2024 17:40:53 GMT</pubDate>
+
+    <image>
+      <link>https://habr.com/ru/</link>
+      <url>https://habrastorage.org/webt/ym/el/wk/ymelwk3zy1gawz4nkejl_-ammtc.png</url>
+      <title>Хабр</title>
+    </image>
+
+    <item>
+      <title><![CDATA[Городской мозг: как Сингапур цифровизировал управление государством]]></title>
+      <guid isPermaLink="true">https://habr.com/ru/companies/onlinepatent/articles/801085/</guid>
+      <link>https://habr.com/ru/companies/onlinepatent/articles/801085/?utm_campaign=801085&amp;utm_source=habrahabr&amp;utm_medium=rss</link>
+      <description><![CDATA[<img src="https://habrastorage.org/getpro/habr/upload_files/253/da2/dbb/253da2dbb6fb4cca85f4d4a45ab6045a.png" /><p>Сингапур — небольшое островное государство с площадью всего 734 кв. км и населением 5,9 млн человек. В 1960-х там не было ничего, кроме трущоб, а сейчас его называют одним из самых технологически продвинутых мест планеты.&nbsp;</p><p>Одно из самых впечатляющих преобразований — цифровизация госуправления. В то время, как в некоторых странах только начинают внедрять биометрическую идентификацию, «всевидящее око» Сингапура знает всех своих граждан в лицо в прямом смысле этого слова. А еще — следит за каждым их движением при помощи десятков тысяч камер и беспристрастных роботов-полицейских. Что это — концепция комфортного и безопасного города будущего или же цифровой ГУЛАГ? Понятное дело, что всё куда как сложнее. Разбираемся.&nbsp;</p><p></p> <a href="https://habr.com/ru/articles/801085/?utm_campaign=801085&amp;utm_source=habrahabr&amp;utm_medium=rss#habracut">Читать далее</a>]]></description>
+
+      <pubDate>Mon, 18 Mar 2024 13:56:20 GMT</pubDate>
+      <dc:creator><![CDATA[gregyku (Онлайн Патент)]]></dc:creator>
+
+      <category><![CDATA[сингапур]]></category><category><![CDATA[цифровизация]]></category><category><![CDATA[искусственный интеллект]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[ИИ в 3D: Где мы сейчас и какое будущее нас ждёт? (Часть 3)]]></title>
+      <guid isPermaLink="true">https://habr.com/ru/articles/800949/</guid>
+      <link>https://habr.com/ru/articles/800949/?utm_campaign=800949&amp;utm_source=habrahabr&amp;utm_medium=rss</link>
+      <description><![CDATA[<img src="https://habrastorage.org/getpro/habr/upload_files/38d/e12/f82/38de12f8263c75a27d6ae439631baf9e.png" /><p>Мир, в котором мы с вами живём и который непосредственно ощущаем, является объёмным: расположение любой точки в нём можно описать тремя координатами, и этот факт элементарно зашит в нашу природу. Чем больше “понимания” система искусственного интеллекта будет иметь относительно истинной сущности вещей, включая их расположение, форму и объем, тем легче она будет справляться с задачами, которые до сих пор мог выполнять только человек.&nbsp;</p><p>В этой статье разберём, как ИИ помогает решать одну из ключевых задач робототехники, а именно - понимание и ориентация в объёмных пространствах!</p><p></p> <a href="https://habr.com/ru/articles/800949/?utm_campaign=800949&amp;utm_source=habrahabr&amp;utm_medium=rss#habracut">Читать далее</a>]]></description>
+
+      <pubDate>Mon, 18 Mar 2024 08:58:07 GMT</pubDate>
+      <dc:creator><![CDATA[Safreliy]]></dc:creator>
+
+      <category><![CDATA[нейросети]]></category><category><![CDATA[машинное обучение]]></category><category><![CDATA[компьютерное зрение]]></category><category><![CDATA[робототехника]]></category><category><![CDATA[искусственный интеллект]]></category><category><![CDATA[беспилотный автомобиль]]></category><category><![CDATA[роботы]]></category><category><![CDATA[slam]]></category><category><![CDATA[реконструкция]]></category><category><![CDATA[локализация]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[Симуляция миров: как работает нейросеть SORA]]></title>
+      <guid isPermaLink="true">https://habr.com/ru/companies/timeweb/articles/797999/</guid>
+      <link>https://habr.com/ru/companies/timeweb/articles/797999/?utm_campaign=797999&amp;utm_source=habrahabr&amp;utm_medium=rss</link>
+      <description><![CDATA[Видеоконтент стал неотъемлемой частью нашей жизни. ТикТок, Ютуб и прочие платформы с каждым днём всё больше используются людьми как способ отвлечься от повседневности и позволяют ненадолго предаться прокрастинации. Кто бы что ни говорил, но в 2024 году человек не представляет без него жизни, но создание качественного контента это довольно трудоемкая задача. В ней нам может помочь новая нейросеть OpenAI “SORA”.<br>
+<br>
+В этой статье мы рассмотрим, как работает новая революционная нейросеть синтеза видео SORA, пофилософствуем на эту тему и, конечно, помечтаем о AGI. <br>
+<br>
+<div style="text-align:center;"><img src="https://habrastorage.org/webt/mu/ps/ar/mupsarjaby1ax4lkbmbb0kubtry.gif"></div> <a href="https://habr.com/ru/articles/797999/?utm_campaign=797999&amp;utm_source=habrahabr&amp;utm_medium=rss#habracut">Читать дальше &rarr;</a>]]></description>
+
+      <pubDate>Mon, 18 Mar 2024 08:01:07 GMT</pubDate>
+      <dc:creator><![CDATA[Nikuson (Timeweb Cloud)]]></dc:creator>
+
+      <category><![CDATA[timeweb_статьи]]></category><category><![CDATA[искусственный интеллект]]></category><category><![CDATA[ии]]></category><category><![CDATA[нейросети]]></category><category><![CDATA[нейронные сети]]></category><category><![CDATA[видео]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[Мозг промышленного масштаба или как воплотить мечту в реальность?]]></title>
+      <guid isPermaLink="true">https://habr.com/ru/articles/795985/</guid>
+      <link>https://habr.com/ru/articles/795985/?utm_campaign=795985&amp;utm_source=habrahabr&amp;utm_medium=rss</link>
+      <description><![CDATA[<img src="https://habrastorage.org/getpro/habr/upload_files/298/753/e7b/298753e7b1d2db1fe87860aeab623bee.png" /><p>В <a href="https://habr.com/ru/articles/785080/" rel="noopener noreferrer nofollow">предыдущей статье</a> мы рассмотрели различные типы нейросетей и обсудили, какие задачи можно решать с их помощью. Теперь рассмотрим задачу искусственного интеллекта с организационной и технической точки зрения. </p><p>При работе над сложными проектами обычно вовлечена команда разработчиков и специалистов по обработке данных, у которых сразу возникают вопросы: как управлять проектом, совместно разрабатывать модель машинного обучения (Machine Learning model), проводить ее тестирование, каким образом синхронизировать код и результаты экспериментов? После разработки и оптимизации ML-модели возникает необходимость ее развертывания в промышленной среде. Все эти проблемы могут казаться менее увлекательными, чем решение самой задачи машинного обучения, но они имеют критическое значение для успешной реализации ML-проектов.&nbsp;</p><p>В этой статье мы подробно рассмотрим жизненный цикл ML-сервиса от идеи до разработки и внедрения, а также инструменты и принципы, используемые на каждом этапе.&nbsp; </p><p></p> <a href="https://habr.com/ru/articles/795985/?utm_campaign=795985&amp;utm_source=habrahabr&amp;utm_medium=rss#habracut">Читать далее</a>]]></description>
+
+      <pubDate>Sun, 17 Mar 2024 11:30:15 GMT</pubDate>
+      <dc:creator><![CDATA[AlexeySushkov]]></dc:creator>
+
+      <category><![CDATA[mlflow]]></category><category><![CDATA[mlops]]></category><category><![CDATA[mlops tools]]></category><category><![CDATA[data analysis]]></category><category><![CDATA[data science]]></category><category><![CDATA[ml-модель]]></category><category><![CDATA[ml-инженер]]></category><category><![CDATA[docker]]></category><category><![CDATA[kubernetes]]></category><category><![CDATA[project management]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[Художественные приемы и профессиональные термины для создания изображений с ИИ. Всё, что нужно знать]]></title>
+      <guid isPermaLink="true">https://habr.com/ru/articles/800703/</guid>
+      <link>https://habr.com/ru/articles/800703/?utm_campaign=800703&amp;utm_source=habrahabr&amp;utm_medium=rss</link>
+      <description><![CDATA[<img src="https://habrastorage.org/getpro/habr/upload_files/525/5f2/7fc/5255f27fc5e0d4c81357bac94cbb07b1.jpg" /><p>В этой статье собраны все основные понятия для написания текстовой подсказки для генерации изображений с помощью нейросети.</p><p>Если вы хотите создавать качественные изображения, нужно понимать (или просто запомнить) некоторые профессиональные термины и приемы, используемые художниками и фотографами.</p><p>В этой статье мы разберем такие ключевые факторы, как высокая детализация, освещение, стиль изображения и другое.</p> <a href="https://habr.com/ru/articles/800703/?utm_campaign=800703&amp;utm_source=habrahabr&amp;utm_medium=rss#habracut">Читать далее</a>]]></description>
+
+      <pubDate>Sat, 16 Mar 2024 12:30:31 GMT</pubDate>
+      <dc:creator><![CDATA[Neurohudozhnik]]></dc:creator>
+
+      <category><![CDATA[нейросети]]></category><category><![CDATA[нейроарт]]></category><category><![CDATA[иллюстрации]]></category><category><![CDATA[midjourney]]></category><category><![CDATA[stablediffusion]]></category><category><![CDATA[dalle-2]]></category><category><![CDATA[sdxl]]></category>
+    </item>
+
+  </channel>
+</rss>
