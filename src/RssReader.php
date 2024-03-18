@@ -103,11 +103,11 @@ class RssReader
 
         // Sort array by timestamp column
         usort($results, static function ($a, $b) {
-            if ($a['timestamp'] === $b['timestamp']) {
+            if ($a['_timestamp'] === $b['_timestamp']) {
                 return 0;
             }
             // ASC order
-            return ($a['timestamp'] > $b['timestamp']) ? 1 : -1;
+            return ($a['_timestamp'] > $b['_timestamp']) ? 1 : -1;
         });
 
         // Extract IDs and save them all
