@@ -36,10 +36,7 @@ class RssReader
     public function getChannel(string $path): array
     {
         // Read content of RSS feed
-        $fileContents = file_get_contents($path);
-        $fileContents = str_replace(["\n", "\r", "\t"], '', $fileContents);
-        $fileContents = trim(str_replace('"', "'", $fileContents));
-        $simpleXml    = simplexml_load_string($fileContents, "SimpleXMLElement", LIBXML_NOCDATA);
+        $simpleXml = simplexml_load_string(file_get_contents($path), "SimpleXMLElement", LIBXML_NOCDATA);
 
         // Convert content to simpler format
         $encode = json_encode($simpleXml, JSON_THROW_ON_ERROR);
@@ -63,7 +60,7 @@ class RssReader
             $itemId = crc32($item['link']);
             if (!in_array($itemId, $this->cache->getIds(), false)) {
                 $itemTimestamp = (new \DateTime($item['pubDate']))->getTimestamp();
-                $result[] = $item + ['_id' => $itemId, '_timestamp' => $itemTimestamp];
+                $result[]      = $item + ['_id' => $itemId, '_timestamp' => $itemTimestamp];
             }
         }
 
